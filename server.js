@@ -13,10 +13,10 @@ app.get('/', (req, res, next) => {
 });
 
 // Define Routes
-app.use('/api/v1/users', require('./routes/users'));
-app.use('/api/v1/auth', require('./routes/auth'));
-app.use('/api/v1/profile', require('./routes/profile'));
-app.use('/api/v1/posts', require('./routes/posts'));
+app.use('/api/v1/users', require('./routes/api/users'));
+app.use('/api/v1/auth', require('./routes/api/auth'));
+app.use('/api/v1/profile', require('./routes/api/profile'));
+app.use('/api/v1/posts', require('./routes/api/posts'));
 
 const PORT = process.env.PORT || 5000;
 
