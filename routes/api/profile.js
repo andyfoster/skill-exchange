@@ -261,7 +261,7 @@ router.put('/education', [auth, [
     description,
   } = req.body;
 
-  const newExp = {
+  const newEdu = {
     school,
     degree,
     fieldofstudy,
@@ -274,7 +274,7 @@ router.put('/education', [auth, [
   try {
     const profile = await Profile.findOne({ user: req.user.id });
 
-    profile.education.unshift(newExp);
+    profile.education.unshift(newEdu);
 
     await profile.save();
 
