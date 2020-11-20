@@ -242,6 +242,9 @@ router.delete('/experience/:exp_id', auth, async (req, res) => {
 // @access  Private
 router.put('/education', [auth, [
   check('school', 'School is required').not().isEmpty(),
+  check('degree', 'degree is required').not().isEmpty(),
+  check('fieldofstudy', 'Field of Study is required').not().isEmpty(),
+  check('from', 'From is required').not().isEmpty(),
 ]], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
