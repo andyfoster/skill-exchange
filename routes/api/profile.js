@@ -214,7 +214,7 @@ router.put('/experience', [auth, [
       console.error(err.message);
       res.status(500).send('Server error');
     }
-})
+});
 
 // @route   DELETE api/v1/profile/experience/:exp_id
 // @desc    Delete experience from profile
@@ -326,10 +326,10 @@ router.get('/github/:username', async(req, res) => {
       if(error) console.error(error);
 
       if (response.statusCode !== 200) {
-        return res.status(404).json({msg: 'No Github profile found.'})
+        return res.status(404).json({msg: 'No Github profile found.'});
       }
       res.json(JSON.parse(body));
-    })
+    });
 
     
   } catch (err) {
