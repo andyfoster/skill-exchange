@@ -5,7 +5,9 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   USER_LOADED,
-  AUTH_ERROR
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
  } from './types';
 
 // Load token for authenticated user
@@ -48,6 +50,7 @@ export const loadUser = () => async (dispatch) => {
        payload: res.data
      });
 
+     dispatch(loadUser());
    } catch (err) {
      const errors = err.response.data.errors;
 
@@ -57,6 +60,39 @@ export const loadUser = () => async (dispatch) => {
 
      dispatch({
        type: REGISTER_FAIL
+     });
+   }
+ };
+
+ // Log in user
+ export const login = (email, password) => async (dispatch) => {
+   console.log('hit auth login()');
+   const config = {
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   };
+
+   const body = JSON.stringify({ email, password });
+
+   try {
+     const res = await axios.post('/api/v1/auth', body, config);
+
+     dispatch({
+       type: LOGIN_SUCCESS,
+       payload: res.data
+     });
+
+     dispatch(loadUser());
+   } catch (err) {
+     const errors = err.response.data.errors;
+
+     if (errors) {
+       errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
+     }
+
+     dispatch({
+       type: LOGIN_FAIL
      });
    }
  };

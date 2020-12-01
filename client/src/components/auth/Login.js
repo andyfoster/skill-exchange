@@ -1,8 +1,14 @@
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+// Redux
+import { connect } from 'react-redux';
+// import { setAlert } from '../../actions/alert';
+import { login } from '../../actions/auth';
+
+// const Login = ({ setAlert, login }) => {
+const Login = ({ login }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -12,9 +18,9 @@ const Login = () => {
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    console.log('Success');
+    login(email, password);
   };
 
   return (
@@ -49,4 +55,11 @@ const Login = () => {
   )
 }
 
-export default Login
+Login.propTypes = {
+  // setAlert: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+};
+
+// export default connect(null, { setAlert, login })(Login)
+export default connect(null, { login })(Login)
+
