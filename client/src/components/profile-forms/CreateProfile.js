@@ -1,5 +1,5 @@
 import React, { useState, Fragment } from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import {connect } from 'react-redux';
@@ -150,7 +150,7 @@ const CreateProfile = ({ createProfile, history }) => {
         </Fragment>}
 
         <input type="submit" className="btn btn-primary my-1" />
-        <a className="btn btn-light my-1" href="dashboard.html">Go Back</a>
+        <Link className="btn btn-light my-1" to="/dashboard">Go Back</Link>
       </form>
     </Fragment>
   )
