@@ -4,6 +4,7 @@ import Spinner from '../../components/layout/Spinner';
 import { Link } from 'react-router-dom';
 
 import DashboardActions from './DashboardActions';
+import Experience from './Experience';
 
 // Redux
 import { connect } from 'react-redux';
@@ -26,13 +27,16 @@ const Dashboard = ({
         <i className="fas fa-user" /> Welcome, { user && user.name }
       </p>
       { profile !== null ? 
-      <Fragment><DashboardActions /></Fragment> : 
-      <Fragment>
+      (<Fragment>
+        <DashboardActions />
+        <Experience experience={profile.experience} />
+      </Fragment>) : 
+      (<Fragment>
         You don't have a profile yet.
         <Link to='/create-profile' className="btn btn-primary my-1">
           Create a profile
         </Link>
-      </Fragment> }
+      </Fragment>) }
       <p className=""></p>
     </Fragment>
 }
