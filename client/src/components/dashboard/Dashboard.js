@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 import DashboardActions from './DashboardActions';
 import Experience from './Experience';
+import Education from './Education';
 
 // Redux
 import { connect } from 'react-redux';
@@ -30,6 +31,7 @@ const Dashboard = ({
       (<Fragment>
         <DashboardActions />
         <Experience experience={profile.experience} />
+        <Education education={profile.education} />
       </Fragment>) : 
       (<Fragment>
         You don't have a profile yet.
