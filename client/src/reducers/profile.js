@@ -3,6 +3,7 @@ import {
   GET_PROFILE,
   PROFILE_ERROR,
   UPDATE_PROFILE,
+  ACCOUNT_DELETED,
 } from "../actions/types";
 
 const initialState = {
@@ -37,6 +38,10 @@ export default function(state = initialState, action) {
         repos: [],
         loading: false,
       };
+    case ACCOUNT_DELETED:
+      return {
+
+      }
     default:
       return state;
   }

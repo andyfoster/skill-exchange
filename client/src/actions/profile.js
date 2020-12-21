@@ -2,8 +2,10 @@ import axios from 'axios';
 import { setAlert } from './alert';
 
 import { 
+  ACCOUNT_DELETED,
   GET_PROFILE,
   PROFILE_ERROR,
+  CLEAR_PROFILE,
   UPDATE_PROFILE,
  } from './types';
 
@@ -190,12 +192,12 @@ export const deleteExperience = (id) => async (dispatch) => {
     });      
     
   }
-}
+};
 
 // Delete Experience
 export const deleteEducation = (id) => async (dispatch) => {
   try {
-    const res= await axios.delete(`/api/v1/profile/education/${id}`);
+    const res = await axios.delete(`/api/v1/profile/education/${id}`);
 
     dispatch({
       type: UPDATE_PROFILE,
@@ -218,4 +220,36 @@ export const deleteEducation = (id) => async (dispatch) => {
       }
     });
   }
-}
+};
+
+// Delete account and profile
+export const deleteAccount = () => async (dispatch) => {
+  if (window.confirm('Are you sure? This cannot be undone.')) {
+    try {
+      await axios.delete('/api/v1/profile');
+  
+      dispatch({
+        type: CLEAR_PROFILE,
+      });
+      dispatch({
+        type: ACCOUNT_DELETED,
+      });
+  
+      dispatch(
+        setAlert(
+          'Your account has been permanently deleted')
+      );     
+    } catch (err) {
+  
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: { 
+          msg: err.response.statusText, 
+          status: err.response.status,
+        }
+      });
+    }
+
+  }
+
+};
